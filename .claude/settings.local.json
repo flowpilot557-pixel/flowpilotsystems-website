@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Skill(run)",
+      "Bash(curl -s http://localhost:5180/)",
+      "Bash(npx --version)",
+      "Bash(npx playwright *)",
+      "Bash(npm list *)",
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)",
+      "Bash(pkill -f \"vite --port 5180\")",
+      "Bash(pkill -f vite)"
+    ]
+  }
+}
