@@ -15,7 +15,7 @@ export default function FinalCTA() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <PrimaryButton href="#apply">Apply for Pilot →</PrimaryButton>
+          <PrimaryButton>Apply for Pilot →</PrimaryButton>
           <SecondaryButton href="#book">Book a Discovery Call</SecondaryButton>
         </div>
 
