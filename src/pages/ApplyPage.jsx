@@ -190,36 +190,36 @@ const INITIAL = {
   email: '',
   phone: '',
   website: '',
-  location: '',
+  business_location: '',
   // Step 2
   business_type: '',
-  products_services: '',
+  services_products: '',
   // Step 3
   lead_sources: [],
   weekly_enquiries: '',
-  response_speed: '',
-  after_hours: '',
-  biggest_problem: [],
+  response_time: '',
+  after_hours_process: '',
+  lead_followup_problems: [],
   // Step 4
-  flowpilot_actions: [],
-  answer_product_questions: '',
-  data_location: [],
-  common_questions: '',
+  desired_flowpilot_help: [],
+  wants_ai_product_answers: '',
+  data_storage_location: [],
+  common_customer_questions: '',
   // Step 5
   books_appointments: '',
-  ready_to_book: '',
+  booking_preference: '',
   alert_recipients: '',
-  lead_updates_location: '',
+  lead_update_destination: '',
   crm_name: '',
   // Step 6
-  comfortable_with_pilot: '',
-  leads_opted_in: '',
-  scripts_approved: '',
-  never_say: '',
+  pilot_comfort: '',
+  lead_consent_status: '',
+  approval_comfort: '',
+  ai_restrictions: '',
   // Step 7
   budget_fit: '',
-  start_when: '',
-  anything_else: '',
+  start_timing: '',
+  additional_notes: '',
 }
 
 // ── Validation per step ───────────────────────────────────────────────────────
@@ -232,41 +232,41 @@ function validateStep(step, data) {
     if (!data.email.trim()) errs.email = 'Required'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errs.email = 'Enter a valid email'
     if (!data.phone.trim()) errs.phone = 'Required'
-    if (!data.location.trim()) errs.location = 'Required'
+    if (!data.business_location.trim()) errs.business_location = 'Required'
   }
   if (step === 1) {
     if (!data.business_type) errs.business_type = 'Required'
-    if (!data.products_services.trim()) errs.products_services = 'Required'
+    if (!data.services_products.trim()) errs.services_products = 'Required'
   }
   if (step === 2) {
     if (!data.lead_sources.length) errs.lead_sources = 'Select at least one'
     if (!data.weekly_enquiries) errs.weekly_enquiries = 'Required'
-    if (!data.response_speed) errs.response_speed = 'Required'
-    if (!data.after_hours.trim()) errs.after_hours = 'Required'
-    if (!data.biggest_problem.length) errs.biggest_problem = 'Select at least one'
+    if (!data.response_time) errs.response_time = 'Required'
+    if (!data.after_hours_process.trim()) errs.after_hours_process = 'Required'
+    if (!data.lead_followup_problems.length) errs.lead_followup_problems = 'Select at least one'
   }
   if (step === 3) {
-    if (!data.flowpilot_actions.length) errs.flowpilot_actions = 'Select at least one'
-    if (!data.answer_product_questions) errs.answer_product_questions = 'Required'
-    if (!data.common_questions.trim()) errs.common_questions = 'Required'
+    if (!data.desired_flowpilot_help.length) errs.desired_flowpilot_help = 'Select at least one'
+    if (!data.wants_ai_product_answers) errs.wants_ai_product_answers = 'Required'
+    if (!data.common_customer_questions.trim()) errs.common_customer_questions = 'Required'
   }
   if (step === 4) {
     if (!data.books_appointments) errs.books_appointments = 'Required'
-    if (!data.ready_to_book) errs.ready_to_book = 'Required'
+    if (!data.booking_preference) errs.booking_preference = 'Required'
     if (!data.alert_recipients.trim()) errs.alert_recipients = 'Required'
-    if (!data.lead_updates_location) errs.lead_updates_location = 'Required'
-    if (data.lead_updates_location === 'Existing CRM' && !data.crm_name.trim())
+    if (!data.lead_update_destination) errs.lead_update_destination = 'Required'
+    if (data.lead_update_destination === 'Existing CRM' && !data.crm_name.trim())
       errs.crm_name = 'Please enter your CRM name'
   }
   if (step === 5) {
-    if (!data.comfortable_with_pilot) errs.comfortable_with_pilot = 'Required'
-    if (!data.leads_opted_in) errs.leads_opted_in = 'Required'
-    if (!data.scripts_approved) errs.scripts_approved = 'Required'
-    if (!data.never_say.trim()) errs.never_say = 'Required'
+    if (!data.pilot_comfort) errs.pilot_comfort = 'Required'
+    if (!data.lead_consent_status) errs.lead_consent_status = 'Required'
+    if (!data.approval_comfort) errs.approval_comfort = 'Required'
+    if (!data.ai_restrictions.trim()) errs.ai_restrictions = 'Required'
   }
   if (step === 6) {
     if (!data.budget_fit) errs.budget_fit = 'Required'
-    if (!data.start_when) errs.start_when = 'Required'
+    if (!data.start_timing) errs.start_timing = 'Required'
   }
   return errs
 }
@@ -317,13 +317,24 @@ export default function ApplyPage() {
     setSubmitting(true)
     setSubmitError('')
     try {
-      await fetch(N8N_WEBHOOK_URL, {
+      const payload = { ...data, source: 'Website form' }
+      console.log('[FlowPilot] Submitting payload:', payload)
+      const res = await fetch(N8N_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       })
-      setSubmitted(true)
-    } catch {
+      const json = await res.json()
+      console.log('[FlowPilot] n8n response:', json)
+      if (json.success === true) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(
+          'There was a problem submitting your application. Please try again or email us directly.'
+        )
+      }
+    } catch (err) {
+      console.error('[FlowPilot] Submission error:', err)
       setSubmitError(
         'There was a problem submitting your application. Please try again or email us directly.'
       )
@@ -407,7 +418,7 @@ export default function ApplyPage() {
               <Input id="website" value={data.website} onChange={set('website')} placeholder="e.g. https://yourbusiness.com.au" />
             </Field>
             <Field label="Business Location / Service Area" required>
-              <Input id="location" value={data.location} onChange={set('location')} placeholder="e.g. Melbourne, VIC or South East Queensland" error={errors.location} />
+              <Input id="business_location" value={data.business_location} onChange={set('business_location')} placeholder="e.g. Melbourne, VIC or South East Queensland" error={errors.business_location} />
             </Field>
           </StepCard>
         )}
@@ -433,11 +444,11 @@ export default function ApplyPage() {
             </Field>
             <Field label="What services or products do you sell?" required>
               <Textarea
-                id="products_services"
-                value={data.products_services}
-                onChange={set('products_services')}
+                id="services_products"
+                value={data.services_products}
+                onChange={set('services_products')}
                 placeholder="Briefly describe your main services, products, or offers."
-                error={errors.products_services}
+                error={errors.services_products}
               />
             </Field>
           </StepCard>
@@ -477,10 +488,10 @@ export default function ApplyPage() {
             </Field>
             <Field label="How quickly do you usually respond to new leads?" required>
               <Select
-                id="response_speed"
-                value={data.response_speed}
-                onChange={set('response_speed')}
-                error={errors.response_speed}
+                id="response_time"
+                value={data.response_time}
+                onChange={set('response_time')}
+                error={errors.response_time}
                 options={[
                   'Within 5 minutes',
                   'Within 30 minutes',
@@ -493,19 +504,19 @@ export default function ApplyPage() {
             </Field>
             <Field label="What happens to enquiries that come in after hours or on weekends?" required>
               <Textarea
-                id="after_hours"
-                value={data.after_hours}
-                onChange={set('after_hours')}
+                id="after_hours_process"
+                value={data.after_hours_process}
+                onChange={set('after_hours_process')}
                 placeholder="Describe what happens to leads outside business hours."
-                error={errors.after_hours}
+                error={errors.after_hours_process}
               />
             </Field>
             <Field label="What is your biggest lead follow-up problem right now?" required>
               <CheckboxGroup
-                id="biggest_problem"
-                value={data.biggest_problem}
-                onChange={setCheck('biggest_problem')}
-                error={errors.biggest_problem}
+                id="lead_followup_problems"
+                value={data.lead_followup_problems}
+                onChange={setCheck('lead_followup_problems')}
+                error={errors.lead_followup_problems}
                 options={[
                   'Leads come in after hours',
                   'We respond too slowly',
@@ -527,10 +538,10 @@ export default function ApplyPage() {
           <StepCard number={4} title="What You Want FlowPilot To Help With">
             <Field label="What would you like FlowPilot to do first?" required>
               <CheckboxGroup
-                id="flowpilot_actions"
-                value={data.flowpilot_actions}
-                onChange={setCheck('flowpilot_actions')}
-                error={errors.flowpilot_actions}
+                id="desired_flowpilot_help"
+                value={data.desired_flowpilot_help}
+                onChange={setCheck('desired_flowpilot_help')}
+                error={errors.desired_flowpilot_help}
                 options={[
                   'Call new leads',
                   'Send SMS follow-up',
@@ -548,10 +559,10 @@ export default function ApplyPage() {
             </Field>
             <Field label="Do you want the AI assistant to answer product, service, or inventory questions?" required>
               <Select
-                id="answer_product_questions"
-                value={data.answer_product_questions}
-                onChange={set('answer_product_questions')}
-                error={errors.answer_product_questions}
+                id="wants_ai_product_answers"
+                value={data.wants_ai_product_answers}
+                onChange={set('wants_ai_product_answers')}
+                error={errors.wants_ai_product_answers}
                 options={[
                   'Yes',
                   'No',
@@ -561,9 +572,9 @@ export default function ApplyPage() {
             </Field>
             <Field label="Where is your product, service, or inventory information currently stored?" helper="Optional — select all that apply.">
               <CheckboxGroup
-                id="data_location"
-                value={data.data_location}
-                onChange={setCheck('data_location')}
+                id="data_storage_location"
+                value={data.data_storage_location}
+                onChange={setCheck('data_storage_location')}
                 options={[
                   'Website',
                   'Google Sheet',
@@ -583,11 +594,11 @@ export default function ApplyPage() {
               helper="e.g. availability, price, service area, appointment times, vehicle details, quote requirements."
             >
               <Textarea
-                id="common_questions"
-                value={data.common_questions}
-                onChange={set('common_questions')}
+                id="common_customer_questions"
+                value={data.common_customer_questions}
+                onChange={set('common_customer_questions')}
                 placeholder="Examples: availability, price, service area, appointment times, vehicle details, quote requirements, inclusions, timelines, finance, or next steps."
-                error={errors.common_questions}
+                error={errors.common_customer_questions}
                 rows={5}
               />
             </Field>
@@ -608,10 +619,10 @@ export default function ApplyPage() {
             </Field>
             <Field label="What should happen when a lead is ready to book or speak to someone?" required>
               <Select
-                id="ready_to_book"
-                value={data.ready_to_book}
-                onChange={set('ready_to_book')}
-                error={errors.ready_to_book}
+                id="booking_preference"
+                value={data.booking_preference}
+                onChange={set('booking_preference')}
+                error={errors.booking_preference}
                 options={[
                   'AI should book directly if availability is known',
                   'AI should request a preferred time and have our team confirm',
@@ -636,10 +647,10 @@ export default function ApplyPage() {
             </Field>
             <Field label="Where do you want lead updates stored?" required>
               <Select
-                id="lead_updates_location"
-                value={data.lead_updates_location}
-                onChange={set('lead_updates_location')}
-                error={errors.lead_updates_location}
+                id="lead_update_destination"
+                value={data.lead_update_destination}
+                onChange={set('lead_update_destination')}
+                error={errors.lead_update_destination}
                 options={[
                   'Google Sheet',
                   'Airtable',
@@ -649,7 +660,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            {data.lead_updates_location === 'Existing CRM' && (
+            {data.lead_update_destination === 'Existing CRM' && (
               <Field label="Which CRM do you use?" helper="Optional — helps us scope the integration.">
                 <Input
                   id="crm_name"
@@ -668,10 +679,10 @@ export default function ApplyPage() {
           <StepCard number={6} title="Pilot Readiness">
             <Field label="Are you comfortable testing an AI-assisted lead follow-up system as part of a pilot?" required>
               <Select
-                id="comfortable_with_pilot"
-                value={data.comfortable_with_pilot}
-                onChange={set('comfortable_with_pilot')}
-                error={errors.comfortable_with_pilot}
+                id="pilot_comfort"
+                value={data.pilot_comfort}
+                onChange={set('pilot_comfort')}
+                error={errors.pilot_comfort}
                 options={[
                   'Yes',
                   'Yes, but I want to approve scripts first',
@@ -682,19 +693,19 @@ export default function ApplyPage() {
             </Field>
             <Field label="Are your leads people who have enquired, opted in, or requested contact from your business?" required>
               <Select
-                id="leads_opted_in"
-                value={data.leads_opted_in}
-                onChange={set('leads_opted_in')}
-                error={errors.leads_opted_in}
+                id="lead_consent_status"
+                value={data.lead_consent_status}
+                onChange={set('lead_consent_status')}
+                error={errors.lead_consent_status}
                 options={['Yes', 'Mostly yes', 'Not sure', 'No']}
               />
             </Field>
             <Field label="Are you happy for the AI script, follow-up rules, and escalation rules to be reviewed and approved before launch?" required>
               <Select
-                id="scripts_approved"
-                value={data.scripts_approved}
-                onChange={set('scripts_approved')}
-                error={errors.scripts_approved}
+                id="approval_comfort"
+                value={data.approval_comfort}
+                onChange={set('approval_comfort')}
+                error={errors.approval_comfort}
                 options={['Yes', 'No', 'I need more information']}
               />
             </Field>
@@ -704,11 +715,11 @@ export default function ApplyPage() {
               helper="This is used to set guardrails before go-live."
             >
               <Textarea
-                id="never_say"
-                value={data.never_say}
-                onChange={set('never_say')}
+                id="ai_restrictions"
+                value={data.ai_restrictions}
+                onChange={set('ai_restrictions')}
                 placeholder="Examples: do not offer discounts, do not confirm availability unless checked, do not provide finance advice, do not guarantee same-day service."
-                error={errors.never_say}
+                error={errors.ai_restrictions}
                 rows={5}
               />
             </Field>
@@ -734,10 +745,10 @@ export default function ApplyPage() {
             </Field>
             <Field label="When would you like to start?" required>
               <Select
-                id="start_when"
-                value={data.start_when}
-                onChange={set('start_when')}
-                error={errors.start_when}
+                id="start_timing"
+                value={data.start_timing}
+                onChange={set('start_timing')}
+                error={errors.start_timing}
                 options={[
                   'Immediately',
                   'Within 2 weeks',
@@ -749,9 +760,9 @@ export default function ApplyPage() {
             </Field>
             <Field label="Anything else you would like us to know?" helper="Optional.">
               <Textarea
-                id="anything_else"
-                value={data.anything_else}
-                onChange={set('anything_else')}
+                id="additional_notes"
+                value={data.additional_notes}
+                onChange={set('additional_notes')}
                 placeholder="Any context, questions, or constraints we should be aware of."
                 rows={4}
               />
