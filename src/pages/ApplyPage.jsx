@@ -319,6 +319,7 @@ export default function ApplyPage() {
     try {
       const payload = { ...data, source: 'Website form' }
       console.log('[FlowPilot] Submitting payload:', payload)
+      console.log("FlowPilot application payload:", payload)
       const res = await fetch(N8N_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
