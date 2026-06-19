@@ -19,28 +19,29 @@ export function SectionHeading({ eyebrow, children, center = false }) {
   )
 }
 
-export function PrimaryButton({ href, to = '/apply', children }) {
-  if (href) {
+const PRIMARY_CLS = 'inline-flex items-center justify-center gap-2 bg-primary hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition'
+
+export function PrimaryButton({ href, to = '/apply', onClick, children }) {
+  if (onClick) {
     return (
-      <a
-        href={href}
-        className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition"
-      >
+      <button type="button" onClick={onClick} className={PRIMARY_CLS}>
         {children}
-      </a>
+      </button>
     )
   }
-  return (
-    <Link
-      to={to}
-      className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition"
-    >
-      {children}
-    </Link>
-  )
+  if (href) {
+    return <a href={href} className={PRIMARY_CLS}>{children}</a>
+  }
+  return <Link to={to} className={PRIMARY_CLS}>{children}</Link>
 }
 
-export function SecondaryButton({ href = '#book', onClick, children }) {
+export function SecondaryButton({ href = '#book', to, onClick, children }) {
+  const cls = 'text-slate-300 underline underline-offset-4 hover:text-white transition cursor-pointer'
+
+  if (to) {
+    return <Link to={to} className={cls}>{children}</Link>
+  }
+
   function handleClick(e) {
     if (onClick) {
       e.preventDefault()
@@ -50,13 +51,14 @@ export function SecondaryButton({ href = '#book', onClick, children }) {
       window.Calendly?.initPopupWidget({ url: 'https://calendly.com/flowpilot557/30min' })
     }
   }
+
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      className="text-slate-300 underline underline-offset-4 hover:text-white transition cursor-pointer"
-    >
+    <a href={href} onClick={handleClick} className={cls}>
       {children}
     </a>
   )
+}
+
+export function openCalendly() {
+  window.Calendly?.initPopupWidget({ url: 'https://calendly.com/flowpilot557/30min' })
 }

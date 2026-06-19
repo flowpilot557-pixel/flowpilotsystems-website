@@ -1,9 +1,15 @@
-import { PrimaryButton, SecondaryButton } from './ui'
+import { PrimaryButton, SecondaryButton, openCalendly } from './ui'
 
 const FLOW_STEPS = [
-  { label: 'Incoming lead', tag: 'WEB / FB / GOOGLE', glow: 'bg-secondary' },
-  { label: 'AI response', tag: 'FLOWPILOT', glow: 'bg-primary' },
-  { label: 'Handover summary', tag: 'YOUR TEAM', glow: 'bg-neon-violet' },
+  { label: 'New car enquiry', tag: 'WEB / FB / CARSALES', glow: 'bg-secondary' },
+  { label: 'AI BDC responds', tag: 'FLOWPILOT AI', glow: 'bg-primary' },
+  { label: 'CRM handover', tag: 'SALES TEAM', glow: 'bg-neon-violet' },
+]
+
+const BULLETS = [
+  'Responds to new enquiries within minutes — day, night, or weekend',
+  'Qualifies buyer intent, urgency, and timeline using your live inventory data',
+  'Logs to CRM and delivers a clean handover summary to your sales team',
 ]
 
 export default function Hero() {
@@ -28,32 +34,36 @@ export default function Hero() {
 
       <div className="relative max-w-5xl mx-auto px-6 text-center">
         <p className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-secondary border border-border rounded-full px-4 py-1.5 mb-8 bg-surface/60 backdrop-blur-sm">
-          AI Lead Response System · Pilot Program — 1–3 Clients Only
+          AI BDC System · Car Dealerships &amp; High-Value Service Businesses
         </p>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
-          Stop letting <span className="text-gradient">warm leads</span> go cold.
+          Your AI BDC.{' '}
+          <span className="text-gradient">Always On.</span>
         </h1>
 
         <p className="mt-6 text-lg text-body max-w-2xl mx-auto leading-relaxed">
-          FlowPilot follows up with new web, Facebook and Google enquiries automatically —
-          qualifying leads, capturing appointment or callback intent, and sending your team a
-          clean handover summary before the lead goes cold.
+          FlowPilot responds to new car leads, qualifies buyers using your live inventory data,
+          and sends your sales team a clean CRM handover — so warm enquiries don't go cold.
         </p>
 
-        <p className="mt-4 text-base text-muted max-w-2xl mx-auto leading-relaxed">
-          FlowPilot follows up with new leads using your approved business, inventory, and
-          service data — so customers get faster answers and your team gets cleaner handovers.
-        </p>
+        <ul className="mt-8 inline-flex flex-col items-start gap-3 text-left max-w-xl mx-auto">
+          {BULLETS.map((b) => (
+            <li key={b} className="flex items-start gap-3 text-sm text-body">
+              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-secondary shrink-0" />
+              {b}
+            </li>
+          ))}
+        </ul>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <PrimaryButton>Apply for Pilot →</PrimaryButton>
-          <SecondaryButton href="#book">Book a Discovery Call</SecondaryButton>
+          <PrimaryButton onClick={openCalendly}>Book a 15-Minute Demo →</PrimaryButton>
+          <SecondaryButton to="/apply">Apply for Pilot</SecondaryButton>
         </div>
 
         <p className="mt-8 text-sm text-highlight bg-highlight/10 border border-highlight/30 rounded-lg px-4 py-3 inline-flex items-center gap-2">
           <span aria-hidden="true">⚑</span>
-          Only 1–3 pilot spots available. Done-for-you setup. No technical knowledge required.
+          Only 1–3 founding pilot spots available. Done-for-you setup. No technical knowledge required.
         </p>
 
         {/* Floating holographic flow card */}

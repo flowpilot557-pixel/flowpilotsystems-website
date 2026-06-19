@@ -1,5 +1,5 @@
 import FadeInSection from './FadeInSection'
-import { PrimaryButton, SecondaryButton } from './ui'
+import { PrimaryButton, SecondaryButton, openCalendly } from './ui'
 
 export default function FinalCTA() {
   return (
@@ -15,8 +15,8 @@ export default function FinalCTA() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <PrimaryButton>Apply for Pilot →</PrimaryButton>
-          <SecondaryButton href="#book">Book a Discovery Call</SecondaryButton>
+          <PrimaryButton onClick={openCalendly}>Book a 15-Minute Demo →</PrimaryButton>
+          <SecondaryButton to="/apply">Apply for Pilot</SecondaryButton>
         </div>
 
         <p className="mt-8 font-mono text-xs uppercase tracking-wider text-muted">
