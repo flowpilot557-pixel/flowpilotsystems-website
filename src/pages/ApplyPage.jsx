@@ -132,15 +132,16 @@ function StepCard({ number, title, children }) {
   )
 }
 
-function Field({ label, required, helper, children }) {
+function Field({ label, required, helper, htmlFor, children }) {
+  const LabelTag = htmlFor ? 'label' : 'span'
   return (
     <div>
       {label && (
         <div className="mb-1.5">
-          <span className="text-sm font-semibold text-heading">
+          <LabelTag htmlFor={htmlFor} className="text-sm font-semibold text-heading">
             {label}
             {required && <span className="text-primary ml-1">*</span>}
-          </span>
+          </LabelTag>
           {helper && <p className="text-xs text-muted mt-0.5">{helper}</p>}
         </div>
       )}
@@ -403,22 +404,22 @@ export default function ApplyPage() {
         {/* ── Step 1: Contact Details ──────────────────────────────────────── */}
         {step === 0 && (
           <StepCard number={1} title="Contact Details">
-            <Field label="Full Name" required>
+            <Field label="Full Name" required htmlFor="full_name">
               <Input id="full_name" value={data.full_name} onChange={set('full_name')} error={errors.full_name} />
             </Field>
-            <Field label="Business Name" required>
+            <Field label="Business Name" required htmlFor="business_name">
               <Input id="business_name" value={data.business_name} onChange={set('business_name')} error={errors.business_name} />
             </Field>
-            <Field label="Email Address" required>
+            <Field label="Email Address" required htmlFor="email">
               <Input id="email" type="email" value={data.email} onChange={set('email')} error={errors.email} />
             </Field>
-            <Field label="Phone Number" required>
+            <Field label="Phone Number" required htmlFor="phone">
               <Input id="phone" type="tel" value={data.phone} onChange={set('phone')} placeholder="e.g. 0400 000 000" error={errors.phone} />
             </Field>
-            <Field label="Website" helper="Optional — include if you have one.">
+            <Field label="Website" helper="Optional — include if you have one." htmlFor="website">
               <Input id="website" value={data.website} onChange={set('website')} placeholder="e.g. https://yourbusiness.com.au" />
             </Field>
-            <Field label="Business Location / Service Area" required>
+            <Field label="Business Location / Service Area" required htmlFor="business_location">
               <Input id="business_location" value={data.business_location} onChange={set('business_location')} placeholder="e.g. Melbourne, VIC or South East Queensland" error={errors.business_location} />
             </Field>
           </StepCard>
@@ -427,7 +428,7 @@ export default function ApplyPage() {
         {/* ── Step 2: Business Type ────────────────────────────────────────── */}
         {step === 1 && (
           <StepCard number={2} title="Business Type">
-            <Field label="What type of business do you run?" required>
+            <Field label="What type of business do you run?" required htmlFor="business_type">
               <Select
                 id="business_type"
                 value={data.business_type}
@@ -443,7 +444,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="What services or products do you sell?" required>
+            <Field label="What services or products do you sell?" required htmlFor="services_products">
               <Textarea
                 id="services_products"
                 value={data.services_products}
@@ -478,7 +479,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="How many new enquiries do you usually receive per week?" required>
+            <Field label="How many new enquiries do you usually receive per week?" required htmlFor="weekly_enquiries">
               <Select
                 id="weekly_enquiries"
                 value={data.weekly_enquiries}
@@ -487,7 +488,7 @@ export default function ApplyPage() {
                 options={['1–5', '6–10', '11–25', '26–50', '50+']}
               />
             </Field>
-            <Field label="How quickly do you usually respond to new leads?" required>
+            <Field label="How quickly do you usually respond to new leads?" required htmlFor="response_time">
               <Select
                 id="response_time"
                 value={data.response_time}
@@ -503,7 +504,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="What happens to enquiries that come in after hours or on weekends?" required>
+            <Field label="What happens to enquiries that come in after hours or on weekends?" required htmlFor="after_hours_process">
               <Textarea
                 id="after_hours_process"
                 value={data.after_hours_process}
@@ -558,7 +559,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="Do you want the AI assistant to answer product, service, or inventory questions?" required>
+            <Field label="Do you want the AI assistant to answer product, service, or inventory questions?" required htmlFor="wants_ai_product_answers">
               <Select
                 id="wants_ai_product_answers"
                 value={data.wants_ai_product_answers}
@@ -593,6 +594,7 @@ export default function ApplyPage() {
               label="What questions do customers commonly ask before booking or buying?"
               required
               helper="e.g. availability, price, service area, appointment times, vehicle details, quote requirements."
+              htmlFor="common_customer_questions"
             >
               <Textarea
                 id="common_customer_questions"
@@ -609,7 +611,7 @@ export default function ApplyPage() {
         {/* ── Step 5: Appointments & Handover ─────────────────────────────── */}
         {step === 4 && (
           <StepCard number={5} title="Appointments, Callbacks, and Handover">
-            <Field label="Do you currently book appointments, test drives, consultations, or callbacks?" required>
+            <Field label="Do you currently book appointments, test drives, consultations, or callbacks?" required htmlFor="books_appointments">
               <Select
                 id="books_appointments"
                 value={data.books_appointments}
@@ -618,7 +620,7 @@ export default function ApplyPage() {
                 options={['Yes', 'No', 'Sometimes']}
               />
             </Field>
-            <Field label="What should happen when a lead is ready to book or speak to someone?" required>
+            <Field label="What should happen when a lead is ready to book or speak to someone?" required htmlFor="booking_preference">
               <Select
                 id="booking_preference"
                 value={data.booking_preference}
@@ -637,6 +639,7 @@ export default function ApplyPage() {
               label="Who should receive lead summaries and alerts?"
               required
               helper="Include name, role, and email if known."
+              htmlFor="alert_recipients"
             >
               <Input
                 id="alert_recipients"
@@ -646,7 +649,7 @@ export default function ApplyPage() {
                 error={errors.alert_recipients}
               />
             </Field>
-            <Field label="Where do you want lead updates stored?" required>
+            <Field label="Where do you want lead updates stored?" required htmlFor="lead_update_destination">
               <Select
                 id="lead_update_destination"
                 value={data.lead_update_destination}
@@ -662,7 +665,7 @@ export default function ApplyPage() {
               />
             </Field>
             {data.lead_update_destination === 'Existing CRM' && (
-              <Field label="Which CRM do you use?" helper="Optional — helps us scope the integration.">
+              <Field label="Which CRM do you use?" helper="Optional — helps us scope the integration." htmlFor="crm_name">
                 <Input
                   id="crm_name"
                   value={data.crm_name}
@@ -678,7 +681,7 @@ export default function ApplyPage() {
         {/* ── Step 6: Pilot Readiness ──────────────────────────────────────── */}
         {step === 5 && (
           <StepCard number={6} title="Pilot Readiness">
-            <Field label="Are you comfortable testing an AI-assisted lead follow-up system as part of a pilot?" required>
+            <Field label="Are you comfortable testing an AI-assisted lead follow-up system as part of a pilot?" required htmlFor="pilot_comfort">
               <Select
                 id="pilot_comfort"
                 value={data.pilot_comfort}
@@ -692,7 +695,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="Are your leads people who have enquired, opted in, or requested contact from your business?" required>
+            <Field label="Are your leads people who have enquired, opted in, or requested contact from your business?" required htmlFor="lead_consent_status">
               <Select
                 id="lead_consent_status"
                 value={data.lead_consent_status}
@@ -701,7 +704,7 @@ export default function ApplyPage() {
                 options={['Yes', 'Mostly yes', 'Not sure', 'No']}
               />
             </Field>
-            <Field label="Are you happy for the AI script, follow-up rules, and escalation rules to be reviewed and approved before launch?" required>
+            <Field label="Are you happy for the AI script, follow-up rules, and escalation rules to be reviewed and approved before launch?" required htmlFor="approval_comfort">
               <Select
                 id="approval_comfort"
                 value={data.approval_comfort}
@@ -714,6 +717,7 @@ export default function ApplyPage() {
               label="What should the AI assistant never say, promise, or do?"
               required
               helper="This is used to set guardrails before go-live."
+              htmlFor="ai_restrictions"
             >
               <Textarea
                 id="ai_restrictions"
@@ -730,7 +734,7 @@ export default function ApplyPage() {
         {/* ── Step 7: Budget & Timing ──────────────────────────────────────── */}
         {step === 6 && (
           <StepCard number={7} title="Budget and Timing">
-            <Field label="The pilot price is $1,500 setup + $600/month. Is this within your current budget if FlowPilot is a good fit?" required>
+            <Field label="The pilot price is $1,500 setup + $600/month. Is this within your current budget if FlowPilot is a good fit?" required htmlFor="budget_fit">
               <Select
                 id="budget_fit"
                 value={data.budget_fit}
@@ -744,7 +748,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="When would you like to start?" required>
+            <Field label="When would you like to start?" required htmlFor="start_timing">
               <Select
                 id="start_timing"
                 value={data.start_timing}
@@ -759,7 +763,7 @@ export default function ApplyPage() {
                 ]}
               />
             </Field>
-            <Field label="Anything else you would like us to know?" helper="Optional.">
+            <Field label="Anything else you would like us to know?" helper="Optional." htmlFor="additional_notes">
               <Textarea
                 id="additional_notes"
                 value={data.additional_notes}

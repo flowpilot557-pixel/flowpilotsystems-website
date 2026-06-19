@@ -126,6 +126,7 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={openCalendly}
+                aria-label="Book a demo for the Professional plan"
                 className="inline-flex items-center justify-center w-full border border-border hover:border-primary/50 text-body hover:text-heading px-6 py-3 rounded-lg font-semibold text-sm transition"
               >
                 Book a Demo →
@@ -144,6 +145,7 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={openCalendly}
+                aria-label="Get in touch about the Enterprise plan"
                 className="inline-flex items-center justify-center w-full border border-border hover:border-primary/50 text-body hover:text-heading px-6 py-3 rounded-lg font-semibold text-sm transition"
               >
                 Get in Touch →

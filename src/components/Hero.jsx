@@ -38,8 +38,8 @@ export default function Hero() {
         </p>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
-          Your AI BDC.{' '}
-          <span className="text-gradient">Always On.</span>
+          Stop letting car leads{' '}
+          <span className="text-gradient">go cold.</span>
         </h1>
 
         <p className="mt-6 text-lg text-body max-w-2xl mx-auto leading-relaxed">
