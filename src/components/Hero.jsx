@@ -57,8 +57,8 @@ export default function Hero() {
         </ul>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <PrimaryButton onClick={openCalendly}>Book a 15-Minute Demo →</PrimaryButton>
-          <SecondaryButton to="/apply">Apply for Pilot</SecondaryButton>
+          <PrimaryButton>Apply for Pilot →</PrimaryButton>
+          <SecondaryButton href="#book">Book a 15-Minute Discovery Call</SecondaryButton>
         </div>
 
         <p className="mt-8 text-sm text-highlight bg-highlight/10 border border-highlight/30 rounded-lg px-4 py-3 inline-flex items-center gap-2">

@@ -160,7 +160,7 @@ export default function Pricing() {
           </p>
           <p>
             <span className="text-heading font-semibold">SMS and WhatsApp.</span>{' '}
-            SMS and WhatsApp follow-up can be added where approved messaging setup is available. During pilot rollout, FlowPilot can operate with AI voice, CRM updates, and email or team handover summaries while messaging approval is completed.
+            SMS is used for booking confirmation and reminders. WhatsApp follow-up can be added where approved messaging setup is available. During pilot rollout, FlowPilot can operate with AI voice, CRM updates, and team handover summaries while messaging approval is completed.
           </p>
           <p className="text-muted text-xs">
             Complex CRM, SMS, WhatsApp, or multi-location integrations may require additional scoping. The sales team remains in control. The AI escalates when confidence is low or a question falls outside approved business data.
@@ -177,8 +177,8 @@ export default function Pricing() {
 
         {/* Bottom CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <PrimaryButton onClick={openCalendly}>Book a 15-Minute Demo →</PrimaryButton>
-          <SecondaryButton to="/apply">Apply for Pilot</SecondaryButton>
+          <PrimaryButton>Apply for Pilot →</PrimaryButton>
+          <SecondaryButton href="#book">Book a 15-Minute Discovery Call</SecondaryButton>
         </div>
       </div>
     </FadeInSection>
