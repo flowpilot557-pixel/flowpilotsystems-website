@@ -6,12 +6,13 @@ export default function FinalCTA() {
     <FadeInSection as="section" className="py-24 px-6">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-heading">
-          Ready to stop missing leads?
+          Your leads aren't waiting.<br className="hidden sm:block" /> Neither should you.
         </h2>
 
         <p className="mt-6 text-body leading-relaxed max-w-xl mx-auto">
-          Apply for one of the first FlowPilot pilot spots. We'll have a quick discovery call,
-          scope your workflow, and get you set up within two weeks.
+          Apply for one of the first FlowPilot pilot spots. We'll scope your workflow on a
+          15-minute call, design your AI script, and have you live with real leads within
+          two weeks — done for you, start to finish.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">

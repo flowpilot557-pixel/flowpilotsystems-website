@@ -7,7 +7,6 @@ import Solution from './components/Solution'
 import HowItWorks from './components/HowItWorks'
 import HandoverExample from './components/HandoverExample'
 import WhatsIncluded from './components/WhatsIncluded'
-import HermesSection from './components/HermesSection'
 import ConnectedData from './components/ConnectedData'
 import UseCases from './components/UseCases'
 import Pricing from './components/Pricing'
@@ -27,7 +26,6 @@ function LandingPage() {
         <HowItWorks />
         <HandoverExample />
         <WhatsIncluded />
-        <HermesSection />
         <ConnectedData />
         <UseCases />
         <Pricing />

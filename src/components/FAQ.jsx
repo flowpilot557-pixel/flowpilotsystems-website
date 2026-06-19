@@ -37,7 +37,7 @@ const FAQS = [
   },
   {
     q: 'Can it use SMS?',
-    a: 'Yes. SMS follow-up is included via Twilio integration. Email notifications are also included. Voice calling (AI voice agent) is available depending on your use case.',
+    a: 'SMS is used for booking confirmation and appointment reminders via Twilio. The AI follow-up itself is handled via voice call. WhatsApp can be added where approved messaging setup is available. Staff notifications are also sent when a lead summary is ready.',
   },
   {
     q: "What happens if the AI can't answer?",

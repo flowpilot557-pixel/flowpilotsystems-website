@@ -51,20 +51,14 @@ export default function ConnectedData() {
 
         <div className="mt-8 max-w-2xl mx-auto space-y-4 text-center text-body leading-relaxed">
           <p>
-            FlowPilot doesn't answer from guesswork. It can connect to your approved product,
-            service, or inventory data — such as your inventory, product list, service
-            catalogue, CRM, Airtable, Google Sheet, or database — so the AI assistant can answer
-            customer questions using approved and up-to-date business information.
+            FlowPilot doesn't answer from guesswork. It connects to your approved inventory,
+            product, or service data — via Airtable, Google Sheet, CRM, or database — so the
+            AI can answer customer questions using up-to-date business information.
           </p>
           <p>
-            For dealerships, that means the assistant can reference vehicle details like price,
-            model, stock number, kilometres, colour, transmission, fuel type, and availability.
-            For service businesses, it can reference your services, service areas, booking
-            rules, quote requirements, and approved FAQs.
-          </p>
-          <p>
-            If the answer is outside the approved data, FlowPilot can escalate to your team
-            instead of making things up.
+            For dealerships, that means referencing vehicle price, availability, stock number,
+            colour, transmission, fuel type, and kilometres in real time. When the answer is
+            outside the approved data, FlowPilot escalates to your team instead of guessing.
           </p>
         </div>
 

@@ -2,7 +2,7 @@ import FadeInSection from './FadeInSection'
 import { SectionHeading } from './ui'
 
 const ITEMS = [
-  'AI lead follow-up assistant (SMS, email, or voice)',
+  'AI voice call follow-up to new leads',
   'Lead qualification workflow',
   'Appointment and callback capture',
   'CRM, Airtable, or Google Sheet update',

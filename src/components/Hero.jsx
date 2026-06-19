@@ -42,12 +42,7 @@ export default function Hero() {
           <span className="text-gradient">go cold.</span>
         </h1>
 
-        <p className="mt-6 text-lg text-body max-w-2xl mx-auto leading-relaxed">
-          FlowPilot responds to new car leads, qualifies buyers using your live inventory data,
-          and sends your sales team a clean CRM handover — so warm enquiries don't go cold.
-        </p>
-
-        <ul className="mt-8 inline-flex flex-col items-start gap-3 text-left max-w-xl mx-auto">
+        <ul className="mt-10 inline-flex flex-col items-start gap-3 text-left max-w-xl mx-auto">
           {BULLETS.map((b) => (
             <li key={b} className="flex items-start gap-3 text-sm text-body">
               <span className="mt-1 h-1.5 w-1.5 rounded-full bg-secondary shrink-0" />
