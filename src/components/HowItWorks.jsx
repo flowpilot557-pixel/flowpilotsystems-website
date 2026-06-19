@@ -8,7 +8,7 @@ const STEPS = [
   },
   {
     title: 'AI follows up',
-    body: 'The AI sends an immediate SMS or email response — or places a voice call — to engage the lead while they\'re still warm, using your approved business and inventory data.',
+    body: 'The AI places a voice call to follow up with the lead while they\'re still warm, using your approved business and inventory data.',
   },
   {
     title: 'Lead is qualified',
