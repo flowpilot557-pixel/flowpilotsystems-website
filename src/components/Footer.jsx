@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border py-10 px-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-muted">
-        <p>FlowPilot © 2025 · AI Lead Response System</p>
+        <p>Flowpilot Automation © 2025 · AI Lead Response System</p>
 
         <div className="flex flex-wrap items-center justify-center gap-6">
           {LINKS.map((link) => (
@@ -19,9 +19,17 @@ export default function Footer() {
           ))}
         </div>
 
-        <a href="mailto:flowpilot557@gmail.com" className="hover:text-body transition">
-          flowpilot557@gmail.com
-        </a>
+        <div className="text-right text-xs leading-relaxed">
+          <p className="font-medium text-muted/70">Flowpilot Automation</p>
+          <p>Operated by Nerissa Moraleda</p>
+          <p>ABN 89 223 234 680</p>
+          <p>
+            <a href="mailto:hello@flowpilot.systems" className="hover:text-body transition">
+              hello@flowpilot.systems
+            </a>
+          </p>
+          <p>Australia</p>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-border/40 text-center text-xs text-muted/50 leading-relaxed">

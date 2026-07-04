@@ -29,7 +29,7 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="text-lg font-extrabold text-heading tracking-tight">
-          FlowPilot
+          Flowpilot Automation
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
