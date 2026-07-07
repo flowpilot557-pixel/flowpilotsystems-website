@@ -1,5 +1,5 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import ParticleField from './components/ParticleField'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -15,6 +15,8 @@ import FAQ from './components/FAQ'
 import FinalCTA from './components/FinalCTA'
 import Footer from './components/Footer'
 import ApplyPage from './pages/ApplyPage'
+
+const ParticleField = lazy(() => import('./components/ParticleField'))
 
 function LandingPage() {
   return (
@@ -41,7 +43,9 @@ function LandingPage() {
 function App() {
   return (
     <div className="bg-bg text-body">
-      <ParticleField />
+      <Suspense fallback={null}>
+        <ParticleField />
+      </Suspense>
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
