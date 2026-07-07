@@ -28,8 +28,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="text-lg font-extrabold text-heading tracking-tight">
-          Flowpilot Automation
+        <Link to="/" className="flex items-center">
+          <img src="/flowpilot-logo-dark.svg" alt="Flowpilot Automation" className="h-20 w-auto rounded-md" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
